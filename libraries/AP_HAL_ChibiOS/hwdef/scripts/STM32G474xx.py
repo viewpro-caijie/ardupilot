@@ -18,7 +18,8 @@ mcu = {
     # flags of 2 means faster memory for CPU intensive work
     # flags of 4 means memory can be used for SDMMC DMA
     'RAM_MAP' : [
-        (0x20000000, 96, 1), # SRAM1/SRAM2
+        #(0x20000000, 96, 1), # SRAM1/SRAM2
+		(0x20000000, 26, 1), # SRAM1/SRAM2
         (0x10000000, 32, 2), # CCM
     ],
 

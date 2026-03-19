@@ -1,0 +1,110 @@
+# hw definition file for processing by chibios_pins.py
+# MCU class and specific type
+
+# MCU class and specific type
+MCU STM32F4xx STM32F412Rx
+
+# bootloader starts firmware at 64k
+FLASH_RESERVE_START_KB 64
+
+# store parameters in pages 2 and 3
+STORAGE_FLASH_PAGE 2
+define HAL_STORAGE_SIZE 8192
+
+# board ID. See Tools/AP_Bootloader/board_types.txt
+APJ_BOARD_ID AP_HW_CUAV_GPS
+
+# setup build for a peripheral firmware
+env AP_PERIPH 1
+
+STM32_ST_USE_TIMER 5
+
+# enable watchdog
+
+# crystal frequency
+OSCILLATOR_HZ 16000000
+
+define CH_CFG_ST_FREQUENCY 1000000
+
+# assume 512k flash part
+FLASH_SIZE_KB 512
+
+STDOUT_SERIAL SD1
+STDOUT_BAUDRATE 57600
+
+# order of UARTs
+SERIAL_ORDER USART1
+
+# a LED to flash
+PB12 LED OUTPUT LOW
+
+# USART1 for debug
+PB6 USART1_TX USART1 NODMA
+PB7 USART1_RX USART1 NODMA
+define DEFAULT_SERIAL0_BAUD 57600
+
+# SWD debugging
+PA13 JTMS-SWDIO SWD
+PA14 JTCK-SWCLK SWD
+
+# only one I2C bus in normal config
+PB4 I2C3_SDA I2C3
+PA8 I2C3_SCL I2C3
+
+define HAL_USE_I2C TRUE
+define STM32_I2C_USE_I2C3 TRUE
+
+define HAL_I2C_CLEAR_ON_TIMEOUT 0
+
+define HAL_I2C_INTERNAL_MASK 0
+
+# only one I2C bus
+I2C_ORDER I2C3
+
+# only one SPI bus in normal config
+PA5 SPI1_SCK SPI1
+PA6 SPI1_MISO SPI1
+PA7 SPI1_MOSI SPI1
+
+# SPI CS
+PA4 MAG_CS CS
+PA10 MS5611_CS CS
+
+# SPI devices
+SPIDEV ms5611 SPI1 DEVID2 MS5611_CS MODE3 20*MHZ 20*MHZ
+
+# compass
+COMPASS IST8310 I2C:0:0x0E false ROTATION_ROLL_180_YAW_90
+
+# baro
+BARO BMP388 I2C:0:0x76
+BARO MS5611 SPI:ms5611
+BARO ICP101XX I2C:0:0x63
+BARO ICP101XX I2C:0:0x64
+BARO ICP201XX I2C:0:0x64
+
+define HAL_BARO_ALLOW_INIT_NO_BARO
+
+define HAL_USE_ADC FALSE
+define STM32_ADC_USE_ADC1 FALSE
+define HAL_DISABLE_ADC_DRIVER TRUE
+
+define DMA_RESERVE_SIZE 0
+
+# enable CAN support
+PB8 CAN1_RX CAN1
+PB9 CAN1_TX CAN1
+PB5 GPIO_CAN1_SILENT OUTPUT PUSHPULL SPEED_LOW LOW
+
+define HAL_DEVICE_THREAD_STACK 768
+
+# we setup a small defaults.parm
+define AP_PARAM_MAX_EMBEDDED_PARAM 256
+
+# disable dual GPS and GPS blending to save flash space
+define HAL_COMPASS_MAX_SENSORS 1
+
+# GPS+MAG+BARO+Buzzer+NeoPixels
+define AP_PERIPH_MAG_ENABLED 1
+define AP_PERIPH_BARO_ENABLED 1
+define AP_PERIPH_AIRSPEED_ENABLED 1

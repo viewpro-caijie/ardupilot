@@ -4,53 +4,36 @@ The VUAV-V7Tiny  flight controller is manufactured and sold by [V-UAV](http://ww
 
 ## Features
 
- - STM32H743 microcontroller
-
- - Two IMUs: ICM45686,BMI088
-
- - Internal IST8310 magnetometer
-
- - Internal ICP-20100 barometer
-
- - Internal RGB LED
-
- - MicroSD card slot port
-
- - 1 Analog power port
-
- - 1 Battery power port
-
- - 5 UARTs and 1 USB ports
-
- - 12 PWM output ports
-
- - 1 I2C and 1CAN ports
-
- - Safety switch port
-
- - Buzzer port
-
- - RC IN port
-
-   
+- STM32H743 microcontroller
+- Two IMUs: ICM45686,BMI088
+- Internal IST8310 magnetometer
+- Internal ICP-20100 barometer
+- Internal RGB LED
+- MicroSD card slot port
+- 1 ESC connector power input and current sensor input
+- 5 UARTs and 1 USB ports
+- 12 PWM output ports
+- 1 I2C and 1CAN ports
+- Safety switch port
+- Buzzer port
+- RC IN port
 
 ##  Pinout
 
-![VUAV-V7Tiny-Connectors.png](VUAV-V7Tiny-Connectors.png)
+![VUAV-V7Tiny-Connectors](VUAV-V7Tiny-Connectors.png)
 
-![VUAV-V7Tiny-Pinouts.png](VUAV-V7Tiny-Pinouts.png)
+![VUAV-V7Tiny-Pinouts](VUAV-V7Tiny-Pinouts.png)
 
 ## UART Mapping
- - SERIAL0 -> USB
- - SERIAL1 -> UART2 (Telem1) (DMA enabled)
- - SERIAL2 -> UART5 (Telem2) (DMA enabled)
- - SERIAL3 -> UART1 (GPS1) (DMA enabled)
- - SERIAL4 -> UART3 (GPS2) (DMA enabled)
- - SERIAL5 -> UART7 (Telem3) (DMA enabled)
- - SERIAL6 -> USB2 (virtual port on same connector)
+- SERIAL0 -> USB
+- SERIAL1 -> UART2 (Telem1) (DMA enabled)
+- SERIAL2 -> UART5 (Telem2) (DMA enabled)
+- SERIAL3 -> UART1 (GPS1) (DMA enabled)
+- SERIAL4 -> UART3 (GPS2) (DMA enabled)
+- SERIAL5 -> UART7 (Telem3) (DMA enabled)
+- SERIAL6 -> USB2 (virtual port on same connector)
 
 The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
-
 
 
 ##  Connectors
@@ -60,8 +43,8 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | Pin  | Signal   | Volt  |
 | ---- | -------- | ----- |
 | 1    | VCC      | +5V   |
-| 2    | TX (OUT) | +3.3V |
-| 3    | RX (IN)  | +3.3V |
+| 2    | TX2 (OUT) | +3.3V |
+| 3    | RX2 (IN)  | +3.3V |
 | 4    | CTS      | +3.3V |
 | 5    | RTS      | +3.3V |
 | 6    | GND      | GND   |
@@ -73,8 +56,8 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | Pin  | Signal   | Volt  |
 | ---- | -------- | ----- |
 | 1    | VCC      | +5V   |
-| 2    | TX (OUT) | +3.3V |
-| 3    | RX (IN)  | +3.3V |
+| 2    | TX5 (OUT) | +3.3V |
+| 3    | RX5 (IN)  | +3.3V |
 | 4    | ADC_3V3  | +3.3V |
 | 5    | ADC_6V6  | +3.3V |
 | 6    | GND      | GND   |
@@ -82,14 +65,13 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 
 
 ### **TELEM3  port**
-
+NOTE: RX7 is pinned out here and on the ESC connector
 | Pin  | Signal   | Volt  |
 | ---- | -------- | ----- |
 | 1    | VCC      | +5V   |
-| 2    | TX (OUT) | +3.3V |
-| 3    | RX (IN)  | +3.3V |
+| 2    | TX7 (OUT) | +3.3V |
+| 3    | RX7 (IN)  | +3.3V |
 | 4    | GND      | GND   |
-
 
 
 ### **GPS1/I2C2 port**
@@ -108,7 +90,6 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | 10   | GND          | GND             |
 
 
-
 ### **GPS2/I2C2 port**
 
 | Pin  | Signal   | Volt            |
@@ -121,7 +102,6 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | 6    | GND      | GND             |
 
 
-
 ### CAN1 port
 
 | Pin  | Signal | Volt  |
@@ -130,7 +110,6 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | 2    | CAN_H  | +3.3V |
 | 3    | CAN_L  | +3.3V |
 | 4    | GND    | GND   |
-
 
 
 ### I2C port
@@ -143,7 +122,6 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | 4    | GND      | GND            |
 
 
-
 ### POWER
 
 | Pin  | Signal  | Volt        |
@@ -154,7 +132,6 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | 4    | VOLTAGE | up to +3.3V |
 | 5    | GND     | GND         |
 | 6    | GND     | GND         |
-
 
 
 ### ESC
@@ -171,11 +148,9 @@ The Telem1 port has RTS/CTS pins, the other UARTs do not have RTS/CTS.
 | 8    | GND        | GND         |
 
 
-
 ## RC Input
 
-The RC input is configured on the RCIN pin at one end of the servo rail. This pin supports all unidirectional RC protocols. For bidirectional protocols, such as CRSF/ELRS, SERIAL1~5 can be set to protocol "23" and the receiver can be connected to SERIAL1~5.
-
+The RC input is configured on the RCIN pin at one end of the servo rail. This pin supports all unidirectional RC protocols. For bidirectional protocols, such as CRSF/ELRS, any SERIAL port can be set to protocol "23" and the receiver can be connected to its RX and TX pins as described in [RC control systems](https://ardupilot.org/rover/docs/common-rc-systems.html).
 
 
 ## PWM Output
@@ -184,13 +159,12 @@ The VUAV-V7Tiny  supports up to 12 PWM outputs,support all PWM protocols. Output
 
 The 12 PWM outputs are in 4 groups:
 
- - PWM 1, 2, 3 and 4 in group1
- - PWM 5, 6, 7 and 8 in group2
- - PWM 9, 10 in group3
- - PWM 11, 12in group4
+- PWM 1, 2, 3 and 4 in group1
+- PWM 5, 6, 7 and 8 in group2
+- PWM 9, 10 in group3
+- PWM 11, 12in group4
 
 Channels within the same group need to use the same output rate. If any channel in a group uses DShot, then all channels in that group need to use DShot.
-
 
 
 ## GPIOs
@@ -208,25 +182,17 @@ The pin numbers for these PWM channels in ArduPilot are shown below:
 | PWM6         | 55   | PWM12        | 61   |
 
 
-
-
 ## Analog inputs
 
 The VUAV-V7Tiny  flight controller has 5 Analog inputs
 
- - ADC Pin18-> Battery Current
+- ADC Pin18-> Battery Current
+- ADC Pin4 -> Battery Voltage 
+- ADC Pin19 -> ADC 3V3 Sense
+- ADC Pin5 -> ADC 6V6 Sense
+- ADC Pin10  -> Battery Voltage input on ESC connector
+- ADC Pin8  -> Servo Voltage
 
- - ADC Pin4 -> Battery Voltage 
-
- - ADC Pin19 -> ADC 3V3 Sense
-
- - ADC Pin5 -> ADC 6V6 Sense
-
- - ADC Pin10  -> Battery Voltage input on ESC connector
-
- - ADC Pin8  -> Servo Voltage
-
-   
 
 ## Battery Monitor Configuration
 
@@ -234,23 +200,19 @@ The board has voltage and current inputs sensor on the POWER and ESC connector.
 The correct battery setting parameters are:
 
 Enable POWER monitor:
- - BATT_MONITOR   4
- - BATT_VOLT_PIN 4
- - BATT_CUR_PIN 8
- - BATT_VOLT_MULT 20
- - BATT_AMP_PERVLT 24
+- BATT_MONITOR   4
+- BATT_VOLT_PIN 4
+- BATT_CUR_PIN 8
+- BATT_VOLT_MULT 20
+- BATT_AMP_PERVLT 24
 
 Enable ESC battery monitor (if used) :
- - BATT2_MONITOR  3
-
- - BATT2_VOLT_PIN 10
-
- - BATT2_VOLT_MULT 10.09
-
-   
+- BATT2_MONITOR  3
+- BATT2_VOLT_PIN 10
+- BATT2_VOLT_MULT 10.09
 
 ## Loading Firmware
 
-Firmware for these boards can be found at [ArduPilot Firmware Download](https://firmware.ardupilot.org/) in sub-folders labeled “VUAV-TinyV7”.
+The firmware can be found at [ArduPilot Firmware Server](https://firmware.ardupilot.org). Click on the corresponding type, such as Plane or Copter, then select the version folder, and finally select the folder labeled "VUAV-TinyV7".
 
 The board comes pre-installed with an ArduPilot compatible bootloader, allowing the loading of \*.apj firmware files with any ArduPilot compatible ground station.
